@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/town/jupyter:qa
+FROM docker.io/library/buildpack-deps:jammy
 
 ADD demo.ipynb /tmp/demo.ipynb
 ADD init.sh /tmp/init.sh
