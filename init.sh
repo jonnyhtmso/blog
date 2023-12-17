@@ -1,1 +1,1 @@
-conda install -y ta-lib akshare mplfinance
+conda install -y ta-lib && python -m pip install akshare mplfinance
