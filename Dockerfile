@@ -16,4 +16,9 @@ ADD jupyter_server_config.json /home/jovyan/.jupyter/jupyter_server_config.json
 ADD demo.ipynb /tmp/demo.ipynb
 ADD init.sh /tmp/init.sh
 
+USER root
+RUN chown jovyan:jovyan -R /home/jovyan/
+
+USER jovyan
+
 RUN bash /tmp/init.sh
