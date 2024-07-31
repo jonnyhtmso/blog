@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag jupyter:$(date +%s)
+
+    - name: Login to Private Registry
+      uses: docker/login-action@v1
+      with:
+        registry: registry.cn-hangzhou.aliyuncs.com
+        username: ${{ secrets.PRIVATE_REGISTRY_USERNAME }}
+        password: ${{ secrets.PRIVATE_REGISTRY_PASSWORD }}
+        
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: your-private-registry.com/your-repository/your-image:$(date +%s)
